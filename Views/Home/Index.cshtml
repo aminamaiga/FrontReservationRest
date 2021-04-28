@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Reservation";
+}
+@model FrontReservation.Models.Response
+
+
+<div class="jumbotron">
+    <a asp-action="GetReservation" class="btn btn-sm btn-primary">Mes Reservations</a>
+</div>
+
+<div class="row">
+    <form asp-controller="Home" asp-action="Index" method="get">
+        <div class="row form-inline" >
+            Ville: <input type="text" name="ville" class="form-control"/>&nbsp;&nbsp;
+            Nom Hotel: <input type="text" name="nomHotel" class="form-control"/>&nbsp;&nbsp;
+            Catégorie: <input type="text" name="categorie" class="form-control"/>&nbsp;&nbsp;
+            Prix Min: <input type="number" name="prixMin" class="form-control"/>&nbsp;&nbsp;
+        </div>
+        <p></p>
+        <div class="row form-inline">
+            Prix Max: <input type="number" name="prixMax" class="form-control"/>&nbsp;&nbsp;
+            nombre Personnes: <input type="number" name="nombrePersonne" class="form-control"/>&nbsp;&nbsp;
+            Date départ: <input type="date" name="dateDepart" class="form-control"/>&nbsp;&nbsp;
+            Date  arrivée: <input type="date" name="dateArrivee" class="form-control"/>&nbsp;&nbsp;
+            <input type="submit" value="Rechercher" class="btn btn-info" />&nbsp;&nbsp;
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    @foreach (var hotel in Model.Responses)
+    {
+    <div class="col-md-4">
+        <h2>@hotel.nomHotel</h2>
+        <p>
+            Nombre Etoile @hotel.idCategorie
+        </p>
+        <p>
+            Nombre Chambre @hotel.nombreChambre
+        </p>
+        <p>
+            GPS ( @hotel.Latitude @hotel.Longitude )
+        </p>
+        <p>
+            Pays: @hotel.Pays
+        </p>
+        <p>
+            Adresse: @hotel.Rue @hotel.Ville
+        </p>
+
+        @Html.ActionLink(
+  "Reserver",
+  "Reserver",
+  "Home",
+  new { hotel.Latitude, hotel.Longitude, hotel.Pays, hotel.IdHotel, hotel.nomHotel, hotel.Ville, hotel.idCategorie },         // action
+  new { @class = "btn btn-success" })
+    </div>
+    }
+</div>

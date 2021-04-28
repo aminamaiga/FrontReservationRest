@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Reserver";
+}
+@model FrontReservation.Models.ReserverRequest
+
+<h2>Ajouter une résérvation <a asp-action="Index" class="btn btn-sm btn-secondary"></a></h2>
+<form asp-action="Reserver" method="post">
+    <div class="form-group">
+        <label for="NomClient">Nom:</label>
+        <input type="text" class="form-control" name="NomClient" />
+    </div>
+    <div class="form-group">
+        <label for="NomClient">Prenom:</label>
+        <input type="text" class="form-control" name="PrenomClient" />
+    </div>
+    <div class="form-group">
+        <label for="NomClient">Nombre de personne:</label>
+        <input type="number" class="form-control" name="NombrePersonne" />
+    </div>
+    <div class="form-group">
+        <label for="NomClient">InfosPaiement:</label>
+        <input type="text" class="form-control" name="InfosPaiement" />
+    </div>
+    <div class="text-center panel-body">
+        <button type="submit" class="btn btn-sm btn-primary btn-lg">Ajouter</button>
+    </div>
+</form>
+
+@if (Model != null)
+{
+    <h2>Reservation</h2>
+    <table class="table table-sm table-striped table-bordered m-2">
+        <thead>
+            <tr>
+                <th>Id Hotel</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th> Nombre Personne</th>
+                <th>Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.IdHotel</td>
+                <td>@Model.NomClient</td>
+                <td>@Model.PrenomClient</td>
+                <td>@Model.NombrePersonne</td>
+                <td>@Model.PrixReservation</td>
+            </tr>
+        </tbody>
+    </table>
+}
+
